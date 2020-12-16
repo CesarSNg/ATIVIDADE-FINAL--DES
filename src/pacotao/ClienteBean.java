@@ -7,6 +7,8 @@ public class ClienteBean {
     private String telCome;
     private String telCel;
     private String email;
+    
+    String s_id = Integer.toString(id);
 
     public ClienteBean() {
     }

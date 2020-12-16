@@ -49,8 +49,8 @@ public class ClienteDAO {
 
     public String alterarCliente(ClienteBean cliente) {
 
-        String sql = "update tbclientes set nome = ?, telR = ?, telCo = ?, telCe = ?, email = ? where id = ?";
-
+        String sql = "update tbclientes set nome = ?, telRede = ?, telCome = ?, telCel = ?, email = ? where id = ?";
+    
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
 
@@ -71,6 +71,31 @@ public class ClienteDAO {
         } catch (SQLException ex) {
             return ex.getMessage();
         }
+        
+        /*String sql = "update tbcliente set nomeCli = ?, emailCli = ?, telCelCli = ?, telResCli = ?, telComCli = ? "
+                + " where codCli = ?";
+
+        try {
+
+            PreparedStatement ps = getCon().prepareStatement(sql);
+
+            ps.setString(1, cliente.getNomeCli());
+            ps.setString(2, cliente.getEmailCli());
+            ps.setString(3, cliente.getTelCelCli());
+            ps.setString(4, cliente.getTelResCli());
+            ps.setString(5, cliente.getTelComCli());
+            ps.setInt(6, cliente.getCodCli());
+ 
+            if (ps.executeUpdate() > 0) {
+
+                return "Alterado com sucesso!!!";
+
+            } else {
+                return "Erro ao alterar!!!";
+            }
+        } catch (SQLException ex) {
+            return ex.getMessage();
+        }*/
     }
     
     public String excluirCliente(ClienteBean cliente) {
@@ -80,7 +105,7 @@ public class ClienteDAO {
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
 
-            ps.setInt(1, cliente.getId());
+            ps.setString(1, ""+cliente.getId());
 
             if (ps.executeUpdate() > 0) {
                 return " sucesso!!!";
@@ -109,7 +134,7 @@ public class ClienteDAO {
                 while (rs.next()) {
 
                     ClienteBean cb = new ClienteBean();
-                    cb.setId(rs.getInt(1));
+                    cb.setId(Integer.parseInt(rs.getString(1)));
                     cb.setNome(rs.getString(2));
                     cb.setTelRede(rs.getString(3));
                     cb.setTelCome(rs.getString(4));
